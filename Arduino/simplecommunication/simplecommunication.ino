@@ -13,37 +13,48 @@ int Threshold = 550;           // Determine which Signal to "count as a beat" an
 
 PulseSensorPlayground pulseSensor;  
 
-void setup()
-{
+void setup() {
+  connectToWifi();
+  setupPulseSensor();
+  initSocket();
+}
+
+void loop() {
+  if (pulseSensor.sawStartOfBeat()) {
+    int myBPM = pulseSensor.getBeatsPerMinute();
+    sendToPC(myBPM);
+  }
+  delay(20); 
+}
+
+// -------------
+
+void connectToWifi() {
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  waitUntilConnectionIsAvailable();
+}
+
+void waitUntilConnectionIsAvailable() {
+  while (WiFi.status() != WL_CONNECTED) {
     delay(500);
   }
-// Configure the PulseSensor object, by assigning our variables to it. 
-  pulseSensor.analogInput(PulseWire);   
-  pulseSensor.blinkOnPulse(LED);       //auto-magically blink Arduino's LED with heartbeat.
-  pulseSensor.setThreshold(Threshold);   
+}
 
-  // Double-check the "pulseSensor" object was created and "began" seeing a signal. 
+void setupPulseSensor() {
+  pulseSensor.analogInput(PulseWire);   
+  pulseSensor.blinkOnPulse(LED);
+  pulseSensor.setThreshold(Threshold);
   pulseSensor.begin();
+}
+
+void initSocket() {
   Udp.begin(42069);
 }
 
-void loop()
-{
-
-if (pulseSensor.sawStartOfBeat()) {            // Constantly test to see if "a beat happened".
-int myBPM = pulseSensor.getBeatsPerMinute();  
-char BPM[4];
-itoa(myBPM, BPM, 10);
-// Calls function on our pulseSensor object that returns BPM as an "int".
-  Udp.beginPacket("192.168.137.1", 12000);
-  Udp.write(BPM);
-  Udp.endPacket();                                             // "myBPM" hold this BPM value now. 
-
-}
-
-  delay(20); 
-  
+void sendToPC(int bpm) {
+  char bpm_as_char_array[4];
+  itoa(bpm, bpm_as_char_array, 10); //Convert int to char[]
+  Udp.beginPacket("192.168.137.1", 12000);  // Hard coded ip and port. We know IP-Address because pc is alwas host
+  Udp.write(bpm_as_char_array);
+  Udp.endPacket();
 }
