@@ -1,2 +1,2 @@
-# Hier kommt toller Pulse Sensor Code.
-Stay tuned!
+# Wichtige Informationen zur Nutzung
+menue_smart ist das finale Programm
