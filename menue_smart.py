@@ -60,7 +60,7 @@ while True:
         anfrage = int(input("Gib die gewünschte Zahl ein\n"))
         break
     except:
-        print("Es muss eine Zahl zwischen 1 und 2 sein")
+        print("Bitte 1, oder 2 angeben")
         continue
 if anfrage > 0 and anfrage < 3: #Interaktion mit ChatGPT ohne Datensatz ist sinnlos, daher muss zuerst ein Datensatz erstellt/geladen werden
     if anfrage == 1:
