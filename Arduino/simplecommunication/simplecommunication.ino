@@ -2,7 +2,7 @@
 #include <WiFiUdp.h>
 #include <PulseSensorPlayground.h>     // Includes the PulseSensorPlayground Library.   
 
-const char* ssid = "schnelly";
+const char* ssid = "Schnelly";
 const char* password = "essenkochen23";
 
 WiFiUDP Udp;
