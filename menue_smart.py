@@ -58,15 +58,15 @@ print("2. Datensatz laden")
 while True:
     try:
         anfrage = int(input("Gib die gewünschte Zahl ein\n"))
-        break
     except:
         print("Bitte 1, oder 2 angeben")
         continue
-if anfrage > 0 and anfrage < 3: #Interaktion mit ChatGPT ohne Datensatz ist sinnlos, daher muss zuerst ein Datensatz erstellt/geladen werden
-    if anfrage == 1:
-        neue_daten_ueber_esp_empfangen_und_speichern()
-    elif anfrage == 2:
-        print(chatbot("Hier sind die Messwerte, bitte merke sie dir für später.\n" + dateioeffnen()))
+    if anfrage > 0 and anfrage < 3: #Interaktion mit ChatGPT ohne Datensatz ist sinnlos, daher muss zuerst ein Datensatz erstellt/geladen werden
+        if anfrage == 1:
+            neue_daten_ueber_esp_empfangen_und_speichern()
+        elif anfrage == 2:
+            print(chatbot("Hier sind die Messwerte, bitte merke sie dir für später.\n" + dateioeffnen()))
+        break
 
 #Hauptschleife für das Menü
 while True:
