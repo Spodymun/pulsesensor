@@ -83,7 +83,7 @@ while True:
     try:
         anfrage = int(input("Gib die gewünschte Zahl ein\n"))
     except:
-        print("Es muss eine Zahl zwischen 1 und 8 sein")
+        print("Es muss eine Zahl zwischen 1 und 9 sein")
         continue
     if anfrage > 0 and anfrage < 10: #Es können nur die angegebenen Modi ausgewählt werden
         if anfrage == 1:
