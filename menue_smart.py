@@ -78,13 +78,14 @@ while True:
     print("5. Vergleich mit anderen Daten")
     print("6. Max/Min BPM ausgeben")
     print("7. Ratschlag von einem Arzt einholen")
-    print("8. Beenden")
+    print("8. ChatGPT direkt fragen")
+    print("9. Beenden")
     try:
         anfrage = int(input("Gib die gewünschte Zahl ein\n"))
     except:
         print("Es muss eine Zahl zwischen 1 und 8 sein")
         continue
-    if anfrage > 0 and anfrage < 9: #Es können nur die angegebenen Modi ausgewählt werden
+    if anfrage > 0 and anfrage < 10: #Es können nur die angegebenen Modi ausgewählt werden
         if anfrage == 1:
            neue_daten_ueber_esp_empfangen_und_speichern()
         elif anfrage == 2:
@@ -100,6 +101,14 @@ while True:
         elif anfrage == 7:
             print(chatbot("Bitte analysiere den dir gegebenen Datensatz und gebe einen ärztlichen Ratschlag"))
         elif anfrage == 8:
+            while True:
+                frage = input("Stell deine Frage.\nBitte beachte, dass maximal 100 Zeichen zulässig sind.\n")
+                if len(frage) <= 100:
+                    print(chatbot(frage))
+                    break
+                else:
+                    print("Deine Frage ist " + str(len(frage)-100) + " Zeichen zu lang.\nBitte formuliere sie erneut.")
+        elif anfrage == 9:
             exit()
     else:
-        print("Es muss eine Zahl zwischen 1 und 8 sein")
+        print("Es muss eine Zahl zwischen 1 und 9 sein")
